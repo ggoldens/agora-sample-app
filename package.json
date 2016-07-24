@@ -1,0 +1,22 @@
+{
+  "name": "agora",
+  "version": "1.0.0",
+  "description": "Agora.io Sample App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggoldens/agora-sample-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggoldens/agora-sample-app/issues"
+  },
+  "homepage": "https://github.com/ggoldens/agora-sample-app#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
