@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ggoldens/agora-sample-app#readme",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^4.14.0"
   }
 }
