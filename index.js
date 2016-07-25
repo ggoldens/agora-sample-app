@@ -16,11 +16,9 @@ app.post('/get-dynamic-key', function (req, res, next) {
 
   var DynamicKey4 = require('./libs/DynamicKey4');
   require('dotenv').load();
-
-  //Put your vendor key here
-  var vendor_key = "75193db79e61472e9c6a2453ed3e01bd"; 
-  //Put your sign key here
-  var sign_key = "3ed9877e2c0f4dc19a22d5d1e86df107";
+  
+  var vendor_key = process.env.VENDOR_KEY;
+  var sign_key = process.env.SIGN_KEY;
   var unixTs = Math.round(new Date().getTime() / 1000);
   var randomInt = Math.round(Math.random()*100000000);
   var channel_name = req.body.channel_name;
