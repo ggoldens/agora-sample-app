@@ -36,6 +36,6 @@ app.post('/get-dynamic-key', function (req, res, next) {
             'media_channel_key': media_channel_key});
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Example app listening on port 3000!');
 });
