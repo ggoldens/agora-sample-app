@@ -17,8 +17,8 @@
         var resolution          = Cookies.get("resolution") || "480p",
             maxFrameRate        = Number(Cookies.get("maxFrameRate") || 15),
             //maxBitRate        = Number(Cookies.get("maxBitRate") || 750),
-            channel             = Cookies.get("roomName"),
-            key                 = Cookies.get("vendorKey"),
+            channel             = 'testing',
+            key                 = '1141ed7799a049f2bb22ee53421a5746',
             remoteStreamList    = [],
             client              = AgoraRTC.createRtcClient(),
             disableAudio        = false,
@@ -37,11 +37,6 @@
             
         var secret = Cookies.get("secretKey");
 
-        if (!key) {
-            $.alert("No vendor key specified.");
-            return;
-        }
-
         /* Joining channel */
         (function initAgoraRTC() {
             client.init(key, function (obj) {
@@ -51,13 +46,23 @@
                     client.setEncryptionSecret(secret);
                     Cookies.remove('secretKey')
                 }
-
-                client.join(key, channel, 0, function(uid) {
-                    console.log("User " + uid + " join channel successfully");
-                    console.log("Timestamp: " + Date.now());
-                    localStream = initLocalStream(uid);
-                    lastLocalStreamId = localStream.getId();
+                //Ask a dynamic key from the backend
+                var randomUid = Math.random();
+                $.ajax({
+                  method: "POST",
+                  url: "/get-dynamic-key",
+                  data: { channel_name: channel, uid: randomUid }
+                })
+                .done(function( data ) {
+                    client.join(data.media_channel_key, channel, 0, function(uid) {
+                        console.log("User " + uid + " join channel successfully");
+                        console.log("Timestamp: " + Date.now());
+                        localStream = initLocalStream(uid);
+                        lastLocalStreamId = localStream.getId();
+                    });
                 });
+
+                
             }, function(err) {
                 console.log(err);
                 if (err) {

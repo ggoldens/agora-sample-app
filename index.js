@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
+var DynamicKey4 = require('./libs/DynamicKey4');
 var app = express();
 
 
@@ -13,12 +14,8 @@ app.get('/', function (req, res) {
 });
 
 app.post('/get-dynamic-key', function (req, res, next) {
-
-  var DynamicKey4 = require('./libs/DynamicKey4');
-  require('dotenv').load();
-  
-  var vendor_key = process.env.VENDOR_KEY;
-  var sign_key = process.env.SIGN_KEY;
+  var vendor_key = process.env.VENDOR_KEY || '1141ed7799a049f2bb22ee53421a5746';
+  var sign_key = process.env.SIGN_KEY || '456a602585224f1b941b4c17abae155a';
   var unixTs = Math.round(new Date().getTime() / 1000);
   var randomInt = Math.round(Math.random()*100000000);
   var channel_name = req.body.channel_name;
