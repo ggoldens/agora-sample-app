@@ -18,7 +18,7 @@
             maxFrameRate        = Number(Cookies.get("maxFrameRate") || 15),
             //maxBitRate        = Number(Cookies.get("maxBitRate") || 750),
             channel             = 'testing',
-            key                 = '1141ed7799a049f2bb22ee53421a5746',
+            key                 = '75193db79e61472e9c6a2453ed3e01bd',
             remoteStreamList    = [],
             client              = AgoraRTC.createRtcClient(),
             disableAudio        = false,
@@ -48,7 +48,7 @@
                 }
                 //Ask a dynamic key from the backend
                 var randomUid = Math.random();
-                $.ajax({
+                /*$.ajax({
                   method: "POST",
                   url: "/get-dynamic-key",
                   data: { channel_name: channel, uid: randomUid }
@@ -60,6 +60,13 @@
                         localStream = initLocalStream(uid);
                         lastLocalStreamId = localStream.getId();
                     });
+                });*/
+
+                client.join(key, channel, 0, function(uid) {
+                    console.log("User " + uid + " join channel successfully");
+                    console.log("Timestamp: " + Date.now());
+                    localStream = initLocalStream(uid);
+                    lastLocalStreamId = localStream.getId();
                 });
 
                 
